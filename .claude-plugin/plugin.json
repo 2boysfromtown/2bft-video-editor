@@ -1,0 +1,11 @@
+{
+  "name": "2bft-video-editor",
+  "displayName": "2BFT Video Editor",
+  "version": "0.2.0",
+  "description": "Claude Code video editing skills: face-tracked auto reframe 16:9 to 9:16, pause cutting, captions, SFX, energy shake, -14 LUFS masters and QC.",
+  "author": { "name": "2BFT (Two Boys From Town)", "url": "https://2bft.in" },
+  "homepage": "https://github.com/2boysfromtown/2bft-video-editor",
+  "repository": "https://github.com/2boysfromtown/2bft-video-editor",
+  "license": "MIT",
+  "keywords": ["video-editing", "auto-reframe", "face-tracking", "9x16", "shorts", "reels", "captions", "ffmpeg", "opencv", "talking-head"]
+}

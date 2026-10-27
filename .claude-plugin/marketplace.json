@@ -1,0 +1,11 @@
+{
+  "name": "2bft",
+  "owner": { "name": "2BFT (Two Boys From Town)", "url": "https://2bft.in" },
+  "plugins": [
+    {
+      "name": "2bft-video-editor",
+      "source": "./",
+      "description": "Face-tracked 9:16 auto reframe + 12 video-editing skills for Claude Code"
+    }
+  ]
+}

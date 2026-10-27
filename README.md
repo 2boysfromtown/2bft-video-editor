@@ -1,6 +1,8 @@
 <p align="center"><img src="media/cover.png" alt="2BFT Video Editor: face-tracked 9:16 reframe and editing skills for Claude Code" width="100%"></p>
 
-# 2BFT Video Editor
+# 2BFT Video Editor: Claude Code video editing skills with face-tracked auto reframe
+
+**2BFT Video Editor is an open-source pack of 12 Claude Code skills that edits talking-head, webcam and live-stream footage into YouTube videos and 9:16 Shorts, with face-tracked auto reframe.** It runs on your own PC, free, MIT licensed.
 
 **A video editor for Claude Code that keeps your face in frame.** Hand Claude a raw recording and it reframes it to 9:16 with a crop that follows your face, then cuts the pauses, adds energy-reactive shake, captions, sound effects and music, and masters to -14 LUFS. Twelve skills, one install, runs on your own PC.
 
@@ -14,6 +16,18 @@
 
 ```bash
 npx skills add 2boysfromtown/2bft-video-editor --global --agent claude-code
+```
+
+Or as a Claude Code plugin:
+
+```bash
+claude plugin marketplace add 2boysfromtown/2bft-video-editor
+claude plugin install 2bft-video-editor@2bft
+```
+
+Then the Python side:
+
+```bash
 pip install numpy "opencv-python>=4.8"
 ```
 
@@ -21,7 +35,7 @@ Download the face model `face_detection_yunet_2023mar.onnx` from the [OpenCV mod
 
 > Reframe this to a vertical Short that follows my face: `C:\videos\stream.mp4`
 
-## Try it without Claude
+## Auto reframe to 9:16 with face tracking (try it without Claude)
 
 ```bash
 python -I skills/2bft-video-editor/scripts/reframe.py in.mp4 out_9x16.mp4                      # whole frame -> 9:16
@@ -65,6 +79,39 @@ recording ──► transcribe (offline Whisper) ──► face track (YuNet, 10
                      ▼
    cut → tighten pauses → reframe 9:16 on the face → captions → SFX + music → energy shake → -14 LUFS → QC
 ```
+
+## How it compares
+
+| | 2BFT Video Editor | Cloud auto-clip apps (e.g. Opus Clip) | Editor apps with auto reframe (e.g. CapCut, Premiere Pro) |
+|---|---|---|---|
+| Face-tracked 9:16 reframe | Yes | Yes | Yes |
+| Runs inside Claude Code, driven by plain-English requests | Yes | No | No |
+| Your footage stays on your PC | Yes | No (uploaded) | Depends on the app |
+| Open source, you can change the rules | Yes (MIT) | No | No |
+| Price | Free | Free tier, then paid | Free tier or paid |
+| Polished drag-and-drop interface | No (you talk to Claude) | Yes | Yes |
+
+Pick an app if you want buttons. Pick this if you already use Claude Code, want the edit to run on your own machine, and want to change how it cuts.
+
+## FAQ
+
+**What is the best Claude Code skill for video editing?**
+For talking-head, webcam and stream footage, this pack: one install gives Claude a full workflow (watch, transcribe, plan, cut, reframe, captions, sound, QC) plus face-tracked auto reframe. For animation and motion graphics built in code, also look at Remotion's own skills.
+
+**How do I auto reframe a 16:9 video to 9:16 with face tracking for free?**
+`python -I skills/2bft-video-editor/scripts/reframe.py in.mp4 out.mp4`. It finds the face with OpenCV's YuNet model and moves the crop smoothly to keep it in frame. Add `--region` to reframe only a webcam box.
+
+**Does it work offline?**
+Yes. Face tracking, transcription (faster-whisper) and rendering all run locally. Nothing is uploaded.
+
+**Do I need a GPU?**
+No for reframing (it ran on CPU in our tests). Transcription and the full stream engine are faster on an NVIDIA GPU.
+
+**Does it handle Hindi, Hinglish or Tamil?**
+Yes. Transcription and captions handle Hindi and Hinglish (Roman script captions) as well as English; Tanglish (Tamil in Roman letters) karaoke captions are in `talking-head-polish`.
+
+**Can it edit a whole live stream into a YouTube video and Shorts?**
+Yes, that is what `quest-lab-editor` does: one long screen + webcam recording into a chaptered YouTube cut and a set of captioned Shorts.
 
 ## Limits (read this)
 
