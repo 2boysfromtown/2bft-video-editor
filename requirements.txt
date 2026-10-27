@@ -1,0 +1,15 @@
+# Face tracking and auto-reframe (2bft-video-editor/scripts/reframe.py, quest-lab-editor face_track.py):
+numpy
+opencv-python>=4.8
+# quest-lab-editor build, mix, render:
+scipy
+soundfile
+pillow
+# Transcription (transcribe-local, quest-lab-editor transcribe_words.py, talking-head-polish):
+faster-whisper
+# quest-lab-editor energy map and music scan:
+librosa
+# talking-head-polish only:
+rembg
+onnxruntime
+# Also needed: ffmpeg + ffprobe on PATH. quest-lab-editor's renderer needs Node 18+ and Chrome or Edge.

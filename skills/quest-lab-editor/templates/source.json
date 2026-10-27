@@ -1,0 +1,25 @@
+{
+  "video": "<path to your recording>.mp4",
+  "audio48k": "work/audio48k.wav",
+  "energy": "work/energy.json",
+  "words": "work/transcript.json",
+  "screen": [
+    48,
+    125,
+    1412,
+    794
+  ],
+  "cam": [
+    1474,
+    156,
+    388,
+    765
+  ],
+  "face": [
+    1490,
+    330,
+    356,
+    356
+  ],
+  "layout_note": "EXAMPLE rects from one stream scene (screen share 48,125 1412x794, webcam 1474,156 388x765). Measure a full-size frame of YOUR recording and replace them."
+}

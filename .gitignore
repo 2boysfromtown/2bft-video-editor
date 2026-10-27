@@ -1,0 +1,14 @@
+# work files, caches, envs, models (anchored to the repo root so skills/ and examples/ are never hidden)
+/.work/
+/_work/
+/_specs/
+/edits/
+/out/
+/outputs/
+/.env
+/.venv/
+/venv/
+/node_modules/
+__pycache__/
+*.pyc
+.u2net/

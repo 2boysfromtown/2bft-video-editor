@@ -1,0 +1,17 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face { font-family: 'Inter'; src: url(fonts/Inter.ttf) format('truetype'); font-weight: 100 900; font-display: block; }
+@font-face { font-family: 'JBM'; src: url(fonts/JetBrainsMono-Bold.ttf) format('truetype'); font-weight: 700; font-display: block; }
+@font-face { font-family: 'Bahn'; src: url(fonts/bahnschrift.ttf) format('truetype'); font-weight: 300 700; font-stretch: 75% 100%; font-display: block; }
+html, body { margin: 0; background: #000; }
+</style></head>
+<body>
+<svg width="0" height="0" style="position:absolute">
+  <filter id="sharp" color-interpolation-filters="sRGB"><feConvolveMatrix order="3" preserveAlpha="true" kernelMatrix="0 -0.45 0 -0.45 2.8 -0.45 0 -0.45 0"/></filter>
+</svg>
+<div style="font-family:Inter;font-weight:900;position:absolute;opacity:0">warm Inter <b>900</b></div>
+<div style="font-family:JBM;position:absolute;opacity:0">warm JBM</div>
+<div style="font-family:Bahn;font-weight:700;font-stretch:75%;position:absolute;opacity:0">warm BAHN</div>
+<script type="module" src="questlab.js"></script>
+</body></html>

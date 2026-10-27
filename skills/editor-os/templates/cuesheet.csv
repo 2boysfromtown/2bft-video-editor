@@ -1,0 +1,12 @@
+t_in,picture,sound,layer,level_db,pan,offset_ms,source,note
+0.00,whole piece,room tone / ambience,bed,-30,0,0,,runs first frame to last; J-cut changes 0.3 s early
+0.00,hook number lands,stamp thump + brass stab,foley,-6,0,0,,peak on the frame the number lands; fade first 25 ms of master
+0.45,counter finishes rolling,small thump,foley,-14,0,0,,rattle ticks every ~45 ms while rolling
+1.50,caption chunk 1 slams,click + low thump,foley,-12,0,0,,one per chunk 0.12 s apart
+3.00,card slides in from right,whoosh + soft snap,foley,-14,0.3,160,,whoosh starts 160 ms before so the peak lands on the card stop
+8.00,SILENCE 1: music stops dead,-,music,-inf,0,0,,keep bed only; hold 0.5-1.0 s
+8.80,the turn lands,low hit + major-key chord,music,-8,0,0,,first sound after silence = one of the most important
+14.00,freeze frame,brass stab + shutter,foley,-8,0,0,,drums stop; hi-hat only until play resumes
+22.00,SILENCE 2: before verdict,-,music,-inf,0,0,,near-silence
+22.60,verdict caption,heaviest hit + riser tail,music,-6,0,0,,
+28.50,end,hard stop (all cut in ~15 ms) + reverb tail,music,-10,0,0,,dry cut is the effect
