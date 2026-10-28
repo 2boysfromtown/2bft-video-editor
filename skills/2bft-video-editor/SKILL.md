@@ -1,6 +1,6 @@
 ---
 name: 2bft-video-editor
-description: The 2BFT video editor for Claude Code - turns raw talking-head, webcam, screen-recording or live-stream footage into finished YouTube videos and vertical Shorts/Reels, with face tracking first - auto-reframe 16:9 to 9:16 so the crop follows the speaker's face, webcam crops that follow the face, energy-reactive camera shake measured from voice and movement, pause and filler tightening measured from the audio, captions, sound effects and music sourced with their licences (including trending songs), offline noise removal, stem splitting and background removal, music ducking, -14 LUFS masters and automatic QC. Use when the user says edit this video, make Shorts or Reels from this, reframe to vertical, follow my face, auto reframe, face tracking, keep me in frame, make it punchy, add captions or shake, cut the pauses, or hands over a recording and wants it finished.
+description: The 2BFT video editor for Claude Code - turns raw talking-head, webcam, screen-recording or live-stream footage into finished YouTube videos and vertical Shorts/Reels, with face tracking first - auto-reframe 16:9 to 9:16 so the crop follows the speaker's face, webcam crops that follow the face, energy-reactive camera shake measured from voice and movement, pause and filler tightening measured from the audio, captions, sound effects, meme sounds, music and B-roll sourced with their licences (including songs trending this week on Shorts, Reels and Indian charts), offline noise removal, stem splitting, background removal and slow motion, speaker labels, music ducking, -14 LUFS masters and automatic QC. Use when the user says edit this video, make Shorts or Reels from this, reframe to vertical, follow my face, auto reframe, face tracking, keep me in frame, make it punchy, add captions or shake, cut the pauses, or hands over a recording and wants it finished.
 ---
 
 # 2BFT video editor
@@ -9,7 +9,7 @@ The entry point for the whole pack. It decides the order of work and calls the r
 
 ## What this pack can and can't do
 
-- **Can:** track faces (OpenCV YuNet), reframe any video to 9:16 / 4:5 / 1:1 with a smooth face-following crop, measure voice and movement energy, transcribe offline with word timings, cut pauses by measured noise floor, render captions, graphics, SFX and music, master to -14 LUFS, and run automatic QC.
+- **Can:** track faces (OpenCV YuNet), reframe any video to 9:16 / 4:5 / 1:1 with a smooth face-following crop, measure voice and movement energy, transcribe offline with word timings, cut pauses by measured noise floor, render captions, graphics, SFX and music, master to -14 LUFS, and run automatic QC. Through `asset-library` it also finds and downloads sound effects, meme sounds and clips, music, B-roll, fonts and overlays from about 400 checked sources with their licences, and checks which songs are trending this week. With `local-av-tools` it removes mic noise, splits music from voice, makes karaoke tracks, cuts the speaker out without a green screen, smooths to 60 fps or slow motion, finds every cut in a reference reel, and labels who speaks when.
 - **Can't:** hear or watch playback, or feel whether a joke lands. Make the measurable decisions, then ask the user to watch and listen.
 - **Must not:** overwrite the source, invent numbers or quotes, bake commercial songs into an export, or show strangers who did not agree to be filmed (blur them).
 
@@ -57,12 +57,15 @@ For stream layouts (screen + webcam), `quest-lab-editor` runs `engine/tools/face
 | Quick automatic jump cuts on any file | `ffmpeg-edit-toolkit/scripts/remove_silence.py` |
 | Pacing numbers (cuts per minute, flat stretches, hook timing, beat-grid fit) | `editor-os/scripts/pacing_report.py` |
 | Sound effects by rule, echo throws, music cut to drops, ducking, -14 LUFS | `quest-lab-editor/references/captions-sfx-voicefx.md`, `video-sound-and-music` |
-| Find music, SFX, meme sounds, trending songs (India + global charts), B-roll, fonts, with licence and credit recorded | `asset-library` (`find_assets.py`, `trending.py`, `fetch_asset.py`; ask before every download) |
-| Clean the voice (fan, hum, traffic) before transcribing and mixing | `local-av-tools/scripts/denoise.py` |
-| Pull music out from under a voice, or split a song into stems for beat cuts | `local-av-tools/scripts/stems.py` (`--two` = voice + music) |
-| Instrumental / karaoke version (personal use only) | `local-av-tools/scripts/karaoke.py` |
-| Who speaks when (podcasts, two-person streams) and speaker-labelled captions | `local-av-tools/scripts/diarize.py` |
+| Find and download SFX, meme sounds, meme clips, music, B-roll, fonts, with licence and credit recorded | `asset-library`: the asset store first (`ASSET_ROOT`), then `find_assets.py <kind> "<query>"` (`--ad-safe` for client work), `fetch_asset.py` to download; ask before every download |
+| Songs trending this week (YouTube Shorts India, Tamil, Hindi, Spotify, Apple, JioSaavn, global) | `asset-library/scripts/trending.py --top 20` (or `--lang ta` / `hi`); commercial songs go on in-app, never baked into the master |
+| Clean the voice (fan, AC, hum, traffic, keyboard) before transcribing and mixing | `local-av-tools/scripts/denoise.py talk.mp4 --strength 18` (listen after: full strength can thin the voice) |
+| Pull music out from under a voice, or split a song into stems for beat cuts | `local-av-tools/scripts/stems.py stream.mp4 --two` (voice + music; `--fast` for speed); the drums stem gives clean hits for `editor-os/scripts/editgrid.py` |
+| Instrumental / karaoke version (personal use only: the model weights have no licence and the song is still copyrighted) | `local-av-tools/scripts/karaoke.py song.mp3 [--keep-backing] [--video]` |
+| Who speaks when (podcasts, calls, two-person streams) and speaker-labelled captions | `local-av-tools/scripts/diarize.py call.mp4 --speakers 2 --srt captions.srt` (credit pyannote if published) |
 | Cuts per minute of a reference reel, contact sheet of every shot | `local-av-tools/scripts/shots.py --sheet` |
+
+Run the `asset-library` and `local-av-tools` scripts by full path (`<skills>/<skill>/scripts/<script>.py`, with `<skills>` written out: PowerShell doesn't expand `~`). Their setup is in each skill's own SKILL.md and `local-av-tools/references/setup.md`.
 
 ## Priority 3: words on screen
 
@@ -73,14 +76,14 @@ For stream layouts (screen + webcam), `quest-lab-editor` runs `engine/tools/face
 
 ## The order of work
 
-1. **Watch:** probe, transcribe, contact sheets every 10 s, read all of it. Map the layout (where the face and screen sit).
+1. **Watch:** probe, run `denoise.py` first on a noisy recording (Whisper reads clean audio better, and the cleaned voice is what you mix; `stems.py --two` if music bleeds under the talk), transcribe, contact sheets every 10 s, read all of it. Map the layout (where the face and screen sit).
 2. **Track:** run face tracking on every region a face appears in; check the hit rate and the stretches where it drops.
-3. **Plan:** pick the moments (hook in the first 3 seconds), write a one-screen plan per deliverable (`editor-os` styles, `quest-lab-editor/templates/director-pass.md`).
+3. **Plan:** pick the moments (hook in the first 3 seconds), write a one-screen plan per deliverable (`editor-os` styles, `quest-lab-editor/templates/director-pass.md`). For Shorts and Reels, run `trending.py` fresh and note candidate songs and where they'd start. List every outside asset the plan needs (SFX, meme sounds or clips, music, B-roll, fonts) with the shot it's for.
 4. **Cut:** story first on the transcript, then pause tightening.
 5. **Picture:** reframe to the delivery aspect with the face track; punch-ins on peaks (max about 1.2x on top of an already-enlarged webcam).
-6. **Words, then sound, then energy** as in the tables above.
+6. **Words, then sound, then energy** as in the tables above. Source sound from the asset store first, then `asset-library`: show one shortlist (what, source, licence, credit, size, shot), download only after the user's yes, and make each file edit-ready (trim with handles, -16 LUFS for SFX and meme clips, 48 kHz).
 7. **QC:** `quest-lab-editor/engine/tools/qa_detect.py` (black/frozen/silent stretches, loudness, flashes), frames at the biggest movements, `check_srt.py` on every SRT. Then ask a human to watch and listen.
-8. **Report:** what changed, the numbers (length before/after, face hit rate, LUFS), what is a placeholder, what a human must still check.
+8. **Report:** what changed, the numbers (length before/after, face hit rate, LUFS), what is a placeholder, what a human must still check. Copy every credit line from the downloads' `.source.json` sidecars into the job's `CREDITS` file and the YouTube description or Reel caption, and name any trending song the user should add in-app (and its start point) for the `_clean` export.
 
 ## Skills in this pack
 

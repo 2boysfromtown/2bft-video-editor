@@ -30,6 +30,8 @@ Run with `python -I <script>`.
 | `scripts/remove_silence.py in out` | Detects pauses and cuts them out, keeping a small pad so words aren't clipped. Prints original vs kept length and cuts per minute. `--dry-run` shows the keep-list first. Tune `--noise` (-35 dB default; use -30 in noisy rooms, -45 if it cuts too much) and `--min-silence` (0.4 s default; raise to keep natural breathing room). Works on video or audio. |
 | `scripts/make_sfx.py kind out.wav` | Generates placeholder `whoosh`, `riser`, `hit`, `pop`, `tick` sounds so a rough cut has sound before real assets are chosen. Replace with real sounds for the final mix. |
 
+Real sound effects, meme sounds, music, meme clips and stock footage come from the `asset-library` skill: it searches the checked sources with licences (`find_assets.py sound|memesound|music|video ...`), checks what's trending, and downloads with `fetch_asset.py` (clip a section of a video page with `--ytdlp --section`). Its `references/download-tools.md` has the clean-up recipes (trim with handles, −16 LUFS, 48 kHz).
+
 For transcript-driven cuts (remove a sentence, cut a filler word): run `transcribe-local`, pick the time ranges from its `[MM:SS]` lines, then build the keep-list as trim/concat (recipe "Cut list").
 
 ## Recipes
