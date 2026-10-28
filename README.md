@@ -71,6 +71,8 @@ Worked example: [`examples/face-reframe`](examples/face-reframe).
 
 ## What's in the pack
 
+<p align="center"><img src="media/features.jpg" alt="2BFT Video Editor features: face-tracked 9:16 reframe, automatic pause cuts, Hindi Tamil English captions, energy shake and sound effects, licensed music and trending songs, noise removal and vocal stems, background removal and slow motion, auto QC at -14 LUFS" width="560"></p>
+
 **Face tracking first**
 - **`2bft-video-editor`** (start here): the entry skill and `reframe.py`. Face-tracked reframe to 9:16, 4:5 or 1:1, with a "camera operator" smoothing chain (gap fill, median, Gaussian, deadzone) so the crop moves like a person, not a jittery tracker. Picks the real face over posters and photos.
 - **`quest-lab-editor`**: our full stream-to-video engine. Webcam crops that follow the face, energy-reactive camera shake measured from voice and movement, quest HUD graphics, kinetic Hinglish or English captions, SFX and echo by rule, music cut to drops, pause tightening from the measured noise floor, Netflix-style subtitle checks and automatic pre-delivery QC (black, frozen, silent, loudness, flash safety).
