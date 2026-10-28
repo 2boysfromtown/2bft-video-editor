@@ -69,7 +69,7 @@ Ask which one if it is not obvious. When unsure, favour what the footage can hon
 ## More
 
 - Cut-by-cut guide with when to use each: `references/cut-vocabulary.md`
-- Comedy: `comedy-editing-timing`. Sound and music: `video-sound-and-music`. Graphics: `motion-graphics-for-video`. Commands: `ffmpeg-edit-toolkit`.
+- Comedy: `comedy-editing-timing`. Sound and music: `video-sound-and-music`. Graphics: `motion-graphics-for-video`. Commands: `ffmpeg-edit-toolkit`. Where to get music, SFX, memes, B-roll, fonts: `asset-library`. Clean-up (noise, stems, cutouts, shot detection): `local-av-tools`.
 
 ## Sources (paraphrased, not quoted)
 

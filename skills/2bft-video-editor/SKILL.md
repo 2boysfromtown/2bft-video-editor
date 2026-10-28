@@ -1,6 +1,6 @@
 ---
 name: 2bft-video-editor
-description: The 2BFT video editor for Claude Code - turns raw talking-head, webcam, screen-recording or live-stream footage into finished YouTube videos and vertical Shorts/Reels, with face tracking first - auto-reframe 16:9 to 9:16 so the crop follows the speaker's face, webcam crops that follow the face, energy-reactive camera shake measured from voice and movement, pause and filler tightening measured from the audio, captions, sound effects, music ducking, -14 LUFS masters and automatic QC. Use when the user says edit this video, make Shorts or Reels from this, reframe to vertical, follow my face, auto reframe, face tracking, keep me in frame, make it punchy, add captions or shake, cut the pauses, or hands over a recording and wants it finished.
+description: The 2BFT video editor for Claude Code - turns raw talking-head, webcam, screen-recording or live-stream footage into finished YouTube videos and vertical Shorts/Reels, with face tracking first - auto-reframe 16:9 to 9:16 so the crop follows the speaker's face, webcam crops that follow the face, energy-reactive camera shake measured from voice and movement, pause and filler tightening measured from the audio, captions, sound effects and music sourced with their licences (including trending songs), offline noise removal, stem splitting and background removal, music ducking, -14 LUFS masters and automatic QC. Use when the user says edit this video, make Shorts or Reels from this, reframe to vertical, follow my face, auto reframe, face tracking, keep me in frame, make it punchy, add captions or shake, cut the pauses, or hands over a recording and wants it finished.
 ---
 
 # 2BFT video editor
@@ -35,6 +35,13 @@ How the "camera operator" behaves: detect at 10 fps, keep the most confident and
 
 For stream layouts (screen + webcam), `quest-lab-editor` runs `engine/tools/face_track.py` on the webcam box during project setup; its `build.py` turns the face's deviation from the usual seated position into a per-frame offset, so hand-made crops keep their composition and only move when the person moves.
 
+### More picture tools
+
+- Smile, mouth-open and blink moments (for punch-ins and laughs), body and hand tracking: `local-av-tools/scripts/track.py`.
+- Cut the speaker out with no green screen (ProRes 4444 alpha or WebM): `local-av-tools/scripts/cutout.py`.
+- Smooth 24/30 fps footage to 60, or slow motion: `local-av-tools/scripts/interpolate.py`.
+- Hand-off to a DaVinci Resolve timeline through Blackmagic's MCP, plus free add-ons: `local-av-tools/references/davinci-resolve.md`.
+
 ### Setup for face tracking
 
 - Python with `numpy` and `opencv-python>=4.8` (`pip install numpy opencv-python`).
@@ -50,6 +57,12 @@ For stream layouts (screen + webcam), `quest-lab-editor` runs `engine/tools/face
 | Quick automatic jump cuts on any file | `ffmpeg-edit-toolkit/scripts/remove_silence.py` |
 | Pacing numbers (cuts per minute, flat stretches, hook timing, beat-grid fit) | `editor-os/scripts/pacing_report.py` |
 | Sound effects by rule, echo throws, music cut to drops, ducking, -14 LUFS | `quest-lab-editor/references/captions-sfx-voicefx.md`, `video-sound-and-music` |
+| Find music, SFX, meme sounds, trending songs (India + global charts), B-roll, fonts, with licence and credit recorded | `asset-library` (`find_assets.py`, `trending.py`, `fetch_asset.py`; ask before every download) |
+| Clean the voice (fan, hum, traffic) before transcribing and mixing | `local-av-tools/scripts/denoise.py` |
+| Pull music out from under a voice, or split a song into stems for beat cuts | `local-av-tools/scripts/stems.py` (`--two` = voice + music) |
+| Instrumental / karaoke version (personal use only) | `local-av-tools/scripts/karaoke.py` |
+| Who speaks when (podcasts, two-person streams) and speaker-labelled captions | `local-av-tools/scripts/diarize.py` |
+| Cuts per minute of a reference reel, contact sheet of every shot | `local-av-tools/scripts/shots.py --sheet` |
 
 ## Priority 3: words on screen
 
@@ -71,4 +84,4 @@ For stream layouts (screen + webcam), `quest-lab-editor` runs `engine/tools/face
 
 ## Skills in this pack
 
-`2bft-video-editor` (this) · `quest-lab-editor` (the full stream-to-video engine and house style) · `editor-os` · `edit-video` · `video-editing-craft` · `comedy-editing-timing` · `video-sound-and-music` · `motion-graphics-for-video` · `ffmpeg-edit-toolkit` · `transcribe-local` · `long-to-shorts` · `talking-head-polish`
+`2bft-video-editor` (this) · `quest-lab-editor` (the full stream-to-video engine and house style) · `asset-library` (where to get music, SFX, memes, trending songs, B-roll, fonts) · `local-av-tools` (denoise, stems, karaoke, cutout, slow-mo, shot and speaker detection) · `editor-os` · `edit-video` · `video-editing-craft` · `comedy-editing-timing` · `video-sound-and-music` · `motion-graphics-for-video` · `ffmpeg-edit-toolkit` · `transcribe-local` · `long-to-shorts` · `talking-head-polish`

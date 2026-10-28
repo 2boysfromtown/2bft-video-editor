@@ -1,6 +1,6 @@
 ---
 name: editor-os
-description: The thinking layer for editing video - how an editor decides what to cut, where, how fast, with which sound, and why. Holds eight selectable edit styles (caption-first social news, archive newsreel, real-time countdown split-screen, time-lapse symphony, visual investigation, beat-driven montage, sports telestrator, broadcast news package) distilled from the lemo-opuscar directing library, a pacing and rhythm system (cuts per minute, shot-length bands, beat grid, reading time, acceleration, breath), a sound-effect cue-sheet method (every visible action gets a sound, layering, placement, silence, J/L-cuts, ducking, loudness), and scripts that measure pacing and snap cuts to a grid. Use whenever the user wants a video edited, re-paced, made punchier, given sound effects or music, cut to a beat, styled like a news bulletin / montage / documentary / explainer, or asks "how should this be edited", "why does this feel slow/flat", "what sound goes here", or "edit this like a pro". Works as the brain above edit-video, which runs the pipeline, and ffmpeg-edit-toolkit, which carries out the cuts.
+description: The thinking layer for editing video - how an editor decides what to cut, where, how fast, with which sound, and why. Holds eight selectable edit styles (caption-first social news, archive newsreel, real-time countdown split-screen, time-lapse symphony, visual investigation, beat-driven montage, sports telestrator, broadcast news package), a pacing and rhythm system (cuts per minute, shot-length bands, beat grid, reading time, acceleration, breath), a sound-effect cue-sheet method (layering, placement, silence, J/L-cuts, ducking, loudness), and scripts that measure pacing and snap cuts to a grid. Use whenever the user wants a video edited, re-paced, made punchier, given sound effects or music, cut to a beat, styled like a news bulletin / montage / documentary / explainer, or asks "how should this be edited", "why does this feel slow/flat", "what sound goes here", or "edit this like a pro". Works as the brain above edit-video, which runs the pipeline, and ffmpeg-edit-toolkit, which carries out the cuts.
 ---
 
 # Editor OS
@@ -129,7 +129,7 @@ Subject too small or hard against the frame edge · too dark to read · captions
 ## Working rules
 
 - Version outputs (`_v1`, `_v2`); never overwrite originals; log commands in `edits/edit-log.md`.
-- Tell the user before any long render, and before downloading any footage or music (what, from where, licence).
+- Tell the user before any long render, and before downloading any footage or music (what, from where, licence). Where to find assets and how to download them with their licence recorded: `asset-library`.
 - Use only material the user owns or has rights to, or properly licensed (public domain, CC0, CC BY with credit). Keep a `CREDITS` note.
 - When taste decides, offer two short options, not an essay.
 - Language: captions and voice in the language the user writes in. Voiceover, if needed, comes from whatever TTS or voice skill the user has (for Indian languages, local IndicF5 or a stock-voice API).

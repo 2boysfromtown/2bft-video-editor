@@ -12,4 +12,7 @@ librosa
 # talking-head-polish only:
 rembg
 onnxruntime
+# Asset search and downloads (asset-library): standard library only; yt-dlp for video pages.
+# Offline sound and picture tools (local-av-tools): use a separate env, see skills/local-av-tools/references/setup.md
+#   torch, demucs, audio-separator[gpu], audioread, transnetv2-pytorch, mediapipe, pyannote.audio
 # Also needed: ffmpeg + ffprobe on PATH. quest-lab-editor's renderer needs Node 18+ and Chrome or Edge.

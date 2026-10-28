@@ -15,7 +15,7 @@ An AI agent can measure level, loudness and frequency balance and can generate o
 
 If the voice sounds bad the video is less engaging, whatever else is done. The same chain, in the same order, each time:
 
-1. Subtle denoise (a heavy one makes speech watery); a gate to drop what's below a threshold if the room is noisy.
+1. Subtle denoise (a heavy one makes speech watery; offline: `local-av-tools/scripts/denoise.py --strength 18`); a gate to drop what's below a threshold if the room is noisy.
 2. EQ: cut rumble below about 80 Hz and hiss above about 12-16 kHz (human voice lives between roughly 80 Hz and 12 kHz).
 3. Gentle shaping EQ for warmth or clarity (a vocal preset, dialled back to subtle).
 4. Compression to even out volume: threshold near the quieter parts of the voice (about -20 dB in the example), ratio about 2:1, make up the gain.
@@ -66,8 +66,8 @@ Shape each effect in five steps:
 ## Process
 
 1. Voice pass (chain), then listen/measure.
-2. Lay ambience, then effects (use `make_sfx.py` placeholders if there is no library), place on peaks.
-3. Choose music by emotion; fit length; EQ pocket; duck; transitions and ending.
+2. Lay ambience, then effects (source them from `asset-library`, `references/sound-effects.md`; `make_sfx.py` placeholders if nothing fits), place on peaks.
+3. Choose music by emotion (sources and licences: `asset-library`, `references/music-libraries.md`; what's trending: its `scripts/trending.py`); fit length; EQ pocket; duck; transitions and ending.
 4. Loudness-normalise; export; ask the user to listen and report anything that distracts.
 
 ## Sources (paraphrased, not quoted)

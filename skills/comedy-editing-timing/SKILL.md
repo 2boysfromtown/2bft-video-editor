@@ -37,6 +37,7 @@ An AI editing agent can read a transcript with timestamps, measure pauses and le
 - **Anthropomorphise.** A human scream or an animal sound under an object tells the audience a history without words.
 - **Same cue, take two.** Repeat the exact sound for a deliberately restarted "bad take" gag.
 - **Silence is a tool.** Hold the quiet before a punchline only if the silence itself is the setup.
+- **Where to get them.** Meme sounds, meme clips and comedy SFX (vine boom, record scratch, sad trombone, Tamil/Hindi meme dialogues) with their rights: `asset-library`.
 
 ## Visual gags (staging)
 

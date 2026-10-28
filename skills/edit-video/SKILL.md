@@ -19,7 +19,7 @@ The entry point. It runs the whole edit in order and calls the specialist skills
 2. Goal and platform: YouTube long-form, Shorts/Reels/TikTok (9:16), ad, course, meeting recap. Target length.
 3. The experience the viewer wants: hang out, be entertained, learn (`video-editing-craft` section 1).
 4. Style references or a brand (if the project has brand notes such as colours, fonts and motion rules, read them).
-5. Assets: music, logos, B-roll, sound effects. If none, say what you'll use as placeholders.
+5. Assets: music, logos, B-roll, sound effects. If none, source them with `asset-library` (where to find and download music, SFX, memes, stock footage, fonts, with licences) or say what you'll use as placeholders. Noisy audio, music bleeding under the voice, cutouts or slow motion: `local-av-tools`.
 6. Constraints: must keep, must cut, deadlines, music licensing.
 
 ## Step 1: Look and listen (never edit blind)
